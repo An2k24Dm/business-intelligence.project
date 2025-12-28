@@ -80,7 +80,7 @@ CREATE TABLE DIM_CATEGORIA (
     nb_subcategoria VARCHAR(100) NOT NULL,
     cod_categoria INTEGER NOT NULL,
     nb_categoria VARCHAR(100) NOT NULL,
-    CONSTRAINT pk_dim_categoria PRIMARY KEY (sk_subcategoria)
+    CONSTRAINT pk_dim_categoria PRIMARY KEY (sk_categoria)
 );
 
 --TABLAS DE HECHOS
