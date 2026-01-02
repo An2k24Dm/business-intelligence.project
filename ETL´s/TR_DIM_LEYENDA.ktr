@@ -1,12 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <transformation>
   <info>
-    <name>DIM_TIEMPO</name>
+    <name>DIM_LEYENDA</name>
     <description/>
     <extended_description/>
     <trans_version/>
     <trans_type>Normal</trans_type>
-    <trans_status>0</trans_status>
     <directory>/</directory>
     <parameters>
     </parameters>
@@ -427,17 +426,17 @@
     </slaveservers>
     <clusterschemas>
     </clusterschemas>
-    <created_user/>
-    <created_date>2020/01/20 00:25:18.031</created_date>
+    <created_user>-</created_user>
+    <created_date>2026/01/02 00:06:53.242</created_date>
     <modified_user>-</modified_user>
-    <modified_date>2020/01/19 23:22:18.473</modified_date>
+    <modified_date>2026/01/02 00:06:53.242</modified_date>
     <key_for_session_key>H4sIAAAAAAAA/wMAAAAAAAAAAAA=</key_for_session_key>
     <is_key_private>N</is_key_private>
   </info>
   <notepads>
   </notepads>
   <connection>
-    <name>BI</name>
+    <name>leyenda</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
@@ -489,34 +488,19 @@
   </connection>
   <order>
     <hop>
-      <from>Fecha_Ini</from>
-      <to>Identificador</to>
+      <from>Obtener datos</from>
+      <to>Select values</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Identificador</from>
-      <to>Calcular Fechas</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Calcular Fechas</from>
-      <to>Calcular datos</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Calcular datos</from>
-      <to>campos_desc_js</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>campos_desc_js</from>
+      <from>Select values</from>
       <to>Table output</to>
       <enabled>Y</enabled>
     </hop>
   </order>
   <step>
-    <name>Calcular Fechas</name>
-    <type>Calculator</type>
+    <name>Obtener datos</name>
+    <type>TableInput</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -525,22 +509,66 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <failIfNoFile>N</failIfNoFile>
-    <calculation>
-      <field_name>fecha</field_name>
-      <calc_type>ADD_DAYS</calc_type>
-      <field_a>START_DAY</field_a>
-      <field_b>seq_dia</field_b>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
+    <connection>leyenda</connection>
+    <sql>SELECT
+  lee_cod_leyenda_estrella   AS cod_leyenda,
+  lee_nb_descripcion_leyenda AS nb_leyenda
+FROM public.leyenda_estrella;
+</sql>
+    <limit>0</limit>
+    <lookup/>
+    <execute_each_row>N</execute_each_row>
+    <variables_active>N</variables_active>
+    <lazy_conversion_active>N</lazy_conversion_active>
+    <cached_row_meta_active>N</cached_row_meta_active>
+    <row-meta>
+      <value-meta>
+        <type>Integer</type>
+        <storagetype>normal</storagetype>
+        <name>cod_leyenda</name>
+        <length>9</length>
+        <precision>0</precision>
+        <origin>Obtener datos</origin>
+        <comments>cod_leyenda</comments>
+        <conversion_Mask>####0;-####0</conversion_Mask>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_MX</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+      <value-meta>
+        <type>String</type>
+        <storagetype>normal</storagetype>
+        <name>nb_leyenda</name>
+        <length>255</length>
+        <precision>-1</precision>
+        <origin>Obtener datos</origin>
+        <comments>nb_leyenda</comments>
+        <conversion_Mask/>
+        <decimal_symbol>.</decimal_symbol>
+        <grouping_symbol>,</grouping_symbol>
+        <currency_symbol/>
+        <trim_type>none</trim_type>
+        <case_insensitive>N</case_insensitive>
+        <collator_disabled>Y</collator_disabled>
+        <collator_strength>0</collator_strength>
+        <sort_descending>N</sort_descending>
+        <output_padding>N</output_padding>
+        <date_format_lenient>N</date_format_lenient>
+        <date_format_locale>es_MX</date_format_locale>
+        <date_format_timezone>America/Caracas</date_format_timezone>
+        <lenient_string_to_number>N</lenient_string_to_number>
+      </value-meta>
+    </row-meta>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -550,145 +578,14 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>384</xloc>
-      <yloc>224</yloc>
+      <xloc>279</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
   <step>
-    <name>Calcular datos</name>
-    <type>Calculator</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <failIfNoFile>N</failIfNoFile>
-    <calculation>
-      <field_name>cod_anio</field_name>
-      <calc_type>YEAR_OF_DATE</calc_type>
-      <field_a>fecha</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>cod_mes</field_name>
-      <calc_type>MONTH_OF_DATE</calc_type>
-      <field_a>fecha</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>cod_dia_mes</field_name>
-      <calc_type>DAY_OF_MONTH</calc_type>
-      <field_a>fecha</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>cod_dia_anio</field_name>
-      <calc_type>DAY_OF_YEAR</calc_type>
-      <field_a>fecha</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>cod_semana</field_name>
-      <calc_type>WEEK_OF_YEAR</calc_type>
-      <field_a>fecha</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>cod_trimestre</field_name>
-      <calc_type>QUARTER_OF_DATE</calc_type>
-      <field_a>fecha</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <calculation>
-      <field_name>cod_dia_semana</field_name>
-      <calc_type>DAY_OF_WEEK</calc_type>
-      <field_a>fecha</field_a>
-      <field_b/>
-      <field_c/>
-      <value_type>None</value_type>
-      <value_length>-1</value_length>
-      <value_precision>-1</value_precision>
-      <remove>N</remove>
-      <conversion_mask/>
-      <decimal_symbol/>
-      <grouping_symbol/>
-      <currency_symbol/>
-    </calculation>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>496</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Fecha_Ini</name>
-    <type>RowGenerator</type>
+    <name>Select values</name>
+    <type>SelectValues</type>
     <description/>
     <distribute>Y</distribute>
     <custom_distribution/>
@@ -698,24 +595,42 @@
       <schema_name/>
     </partitioning>
     <fields>
-      <field>
-        <name>START_DAY</name>
-        <type>Date</type>
-        <format>yyyy-MM-dd</format>
-        <currency/>
-        <decimal/>
-        <group/>
-        <nullif>2020-01-01</nullif>
-        <length>-1</length>
-        <precision>-1</precision>
-        <set_empty_string>N</set_empty_string>
-      </field>
+      <select_unspecified>N</select_unspecified>
+      <meta>
+        <name>cod_leyenda</name>
+        <rename>cod_leyenda</rename>
+        <type>Integer</type>
+        <length>9</length>
+        <precision>0</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
+      <meta>
+        <name>nb_leyenda</name>
+        <rename>nb_leyenda</rename>
+        <type>String</type>
+        <length>255</length>
+        <precision>-2</precision>
+        <conversion_mask/>
+        <date_format_lenient>false</date_format_lenient>
+        <date_format_locale/>
+        <date_format_timezone/>
+        <lenient_string_to_number>false</lenient_string_to_number>
+        <encoding/>
+        <decimal_symbol/>
+        <grouping_symbol/>
+        <currency_symbol/>
+        <storage_type/>
+      </meta>
     </fields>
-    <limit>10000</limit>
-    <never_ending>N</never_ending>
-    <interval_in_ms/>
-    <row_time_field/>
-    <last_time_field/>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
@@ -725,43 +640,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>208</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>Identificador</name>
-    <type>Sequence</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <valuename>seq_dia</valuename>
-    <use_database>N</use_database>
-    <connection>BI</connection>
-    <schema/>
-    <seqname>SEQ_</seqname>
-    <use_counter>Y</use_counter>
-    <counter_name/>
-    <start_at>0</start_at>
-    <increment_by>1</increment_by>
-    <max_value>10000000</max_value>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>288</xloc>
-      <yloc>224</yloc>
+      <xloc>391</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -776,14 +656,14 @@
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>BI</connection>
+    <connection>leyenda</connection>
     <schema>public</schema>
-    <table>dim_tiempo</table>
-    <commit>100000</commit>
+    <table>dim_leyenda</table>
+    <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
     <use_batch>Y</use_batch>
-    <specify_fields>Y</specify_fields>
+    <specify_fields>N</specify_fields>
     <partitioning_enabled>N</partitioning_enabled>
     <partitioning_field/>
     <partitioning_daily>N</partitioning_daily>
@@ -794,58 +674,6 @@
     <return_keys>N</return_keys>
     <return_field/>
     <fields>
-      <field>
-        <column_name>sk_tiempo</column_name>
-        <stream_name>seq_dia</stream_name>
-      </field>
-      <field>
-        <column_name>fecha</column_name>
-        <stream_name>fecha</stream_name>
-      </field>
-      <field>
-        <column_name>cod_anio</column_name>
-        <stream_name>cod_anio</stream_name>
-      </field>
-      <field>
-        <column_name>cod_mes</column_name>
-        <stream_name>cod_mes</stream_name>
-      </field>
-      <field>
-        <column_name>cod_dia_mes</column_name>
-        <stream_name>cod_dia_mes</stream_name>
-      </field>
-      <field>
-        <column_name>cod_dia_anio</column_name>
-        <stream_name>cod_dia_anio</stream_name>
-      </field>
-      <field>
-        <column_name>cod_semana</column_name>
-        <stream_name>cod_semana</stream_name>
-      </field>
-      <field>
-        <column_name>cod_trimestre</column_name>
-        <stream_name>cod_trimestre</stream_name>
-      </field>
-      <field>
-        <column_name>cod_dia_semana</column_name>
-        <stream_name>cod_dia_semana</stream_name>
-      </field>
-      <field>
-        <column_name>des_trimestre</column_name>
-        <stream_name>des_trimestre</stream_name>
-      </field>
-      <field>
-        <column_name>desc_mes</column_name>
-        <stream_name>desc_mes</stream_name>
-      </field>
-      <field>
-        <column_name>desc_mes_corta</column_name>
-        <stream_name>desc_mes_corta</stream_name>
-      </field>
-      <field>
-        <column_name>desc_dia_semana</column_name>
-        <stream_name>desc_dia_semana</stream_name>
-      </field>
     </fields>
     <attributes/>
     <cluster_schema/>
@@ -856,83 +684,8 @@
       </output>
     </remotesteps>
     <GUI>
-      <xloc>720</xloc>
-      <yloc>224</yloc>
-      <draw>Y</draw>
-    </GUI>
-  </step>
-  <step>
-    <name>campos_desc_js</name>
-    <type>ScriptValueMod</type>
-    <description/>
-    <distribute>Y</distribute>
-    <custom_distribution/>
-    <copies>1</copies>
-    <partitioning>
-      <method>none</method>
-      <schema_name/>
-    </partitioning>
-    <compatible>N</compatible>
-    <optimizationLevel>9</optimizationLevel>
-    <jsScripts>
-      <jsScript>
-        <jsScript_type>0</jsScript_type>
-        <jsScript_name>Script 1</jsScript_name>
-        <jsScript_script>des_trimestre = "Trimestre " + cod_trimestre;
-var meses = ["Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"];
-desc_mes = meses[cod_mes - 1];
-var mesesC = ["Ene","Feb","Mar","Abr","May","Jun","Jul","Ago","Sep","Oct","Nov","Dic"];
-desc_mes_corta = mesesC[cod_mes - 1];
-var dias = ["Domingo","Lunes","Martes","Miércoles","Jueves","Viernes","Sábado"];
-desc_dia_semana = dias[cod_dia_semana - 1];
-</jsScript_script>
-      </jsScript>
-    </jsScripts>
-    <fields>
-      <field>
-        <name>des_trimestre</name>
-        <rename>des_trimestre</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>desc_mes</name>
-        <rename>desc_mes</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>desc_mes_corta</name>
-        <rename>desc_mes_corta</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-      <field>
-        <name>desc_dia_semana</name>
-        <rename>desc_dia_semana</rename>
-        <type>String</type>
-        <length>-1</length>
-        <precision>-1</precision>
-        <replace>N</replace>
-      </field>
-    </fields>
-    <attributes/>
-    <cluster_schema/>
-    <remotesteps>
-      <input>
-      </input>
-      <output>
-      </output>
-    </remotesteps>
-    <GUI>
-      <xloc>608</xloc>
-      <yloc>224</yloc>
+      <xloc>503</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>

@@ -10,7 +10,9 @@ INSERT INTO SEDE (Sed_nb_sede, Fk_ciudad) VALUES
 ('Las Mercedes', 1),
 ('El Hatillo', 1),
 ('Galipán', 1),
-('Sebucán', 1);
+('Sebucán', 1),
+('Centro Maracay', 2),
+('Zona Industrial Valencia', 3);
 
 INSERT INTO TIPO_EVENTO (Tie_nb_tipo_evento) VALUES
 ('Feria'),
