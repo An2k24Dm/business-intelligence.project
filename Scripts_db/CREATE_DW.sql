@@ -89,7 +89,7 @@ CREATE TABLE FACT_META (
     sk_evento INTEGER NOT NULL,
     sk_sede INTEGER NOT NULL,
     sk_fecha_evento INTEGER NOT NULL,
-    nro_stands_propuestos INTEGER NOT NULL, --Preguntar, en el dimensional del enunciado dice cantidad_evento
+    nro_stands_propuestos INTEGER NOT NULL,
     cantidad_estim_visitantes INTEGER NOT NULL,
     meta_ingreso NUMERIC(10,4) NOT NULL,
     CONSTRAINT pk_fact_evento PRIMARY KEY (sk_evento, sk_sede, sk_fecha_evento),

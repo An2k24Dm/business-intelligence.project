@@ -71,15 +71,15 @@ INSERT INTO EVENTO (Eve_nb_evento, Eve_fecha_inicio, Eve_fecha_fin, Eve_descripc
 ('Expo Deportes Galipán 2025', '2025-05-15', '2025-05-17', 'Exposición de artículos deportivos y actividades recreativas', 'expodeportes@galipan.com', 3, 3);
 
 INSERT INTO EVENTO_STAND (Fk_evento, Fk_tipo_stand, Evs_cantidad_estimada, Evs_mts_cuadrados_stand, Evs_precio) VALUES
-(1, 1, 20, 6, 400),
-(1, 2, 15, 10, 700),
-(1, 3, 10, 12, 900),
-(2, 1, 25, 4, 300),
-(2, 2, 10, 8, 600),
-(2, 3, 5, 12, 800),
-(3, 1, 30, 5, 350),
-(3, 2, 15, 9, 650),
-(3, 3, 8, 15, 950);
+(1, 1, 20, 6, 500),
+(1, 2, 15, 12, 800),
+(1, 3, 10, 15, 1000),
+(2, 1, 25, 6, 500),
+(2, 2, 10, 12, 800),
+(2, 3, 5, 15, 1000),
+(3, 1, 30, 6, 500),
+(3, 2, 15, 12, 800),
+(3, 3, 8, 15, 1000);
 
 INSERT INTO CONTRATO (Con_fecha_alquiler, Con_mts_cuadrados_adicionales, Con_monto, Fk_cliente, Fk_evento, Fk_subcategoria, Fk_tipo_stand) VALUES
 ('2025-02-15', 0, 400, 1, 1, 1, 1),
