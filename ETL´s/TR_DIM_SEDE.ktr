@@ -441,6 +441,57 @@
     <server>localhost</server>
     <type>POSTGRESQL</type>
     <access>Native</access>
+    <database>bd_expo_ucab_eventos</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc80ece9f85b90da77ed1c3fd89</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>dim_sede_1</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
     <database>dw_expoucab</database>
     <port>5432</port>
     <username>postgres</username>
@@ -823,9 +874,9 @@ JOIN PAIS   p ON p.Pai_cod_pais = c.Fk_pais;
       <method>none</method>
       <schema_name/>
     </partitioning>
-    <connection>dim_sede</connection>
+    <connection>dim_sede_1</connection>
     <schema>public</schema>
-    <table>dim_sede</table>
+    <table>DIM_SEDE</table>
     <commit>1000</commit>
     <truncate>N</truncate>
     <ignore_errors>N</ignore_errors>
