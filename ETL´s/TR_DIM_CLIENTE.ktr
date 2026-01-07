@@ -461,6 +461,61 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>d_cliente</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>dw_expoucab</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc80ece9f85b90da77ed1c3fd89</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>5432</attribute>
       </attribute>
@@ -512,6 +567,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>5432</attribute>
       </attribute>
@@ -539,11 +598,6 @@
   </connection>
   <order>
     <hop>
-      <from>Select values</from>
-      <to>Table output</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
       <from>Obtener datos</from>
       <to>ci_rif</to>
       <enabled>Y</enabled>
@@ -551,6 +605,11 @@
     <hop>
       <from>ci_rif</from>
       <to>Select values</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Select values</from>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -952,8 +1011,8 @@ FROM public.cliente;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>608</xloc>
-      <yloc>160</yloc>
+      <xloc>624</xloc>
+      <yloc>64</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -994,6 +1053,74 @@ FROM public.cliente;
     </remotesteps>
     <GUI>
       <xloc>416</xloc>
+      <yloc>160</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>d_cliente</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>DIM_CLIENTE</table>
+      <key>
+        <name>cod_cliente</name>
+        <field>cod_cliente</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_cliente</name>
+        <rename>cod_cliente</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>ci_rif</name>
+        <rename>nb_cliente</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nb_cliente</name>
+        <rename>cli_rif</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>telefono</name>
+        <rename>telefono</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>direccion</name>
+        <rename>direccion</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>email</name>
+        <rename>email</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>624</xloc>
       <yloc>160</yloc>
       <draw>Y</draw>
     </GUI>

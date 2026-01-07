@@ -601,6 +601,57 @@
     </attributes>
   </connection>
   <connection>
+    <name>f_meta</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>dw_expoucab</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc80ece9f85b90da77ed1c3fd89</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>fact_metas</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
@@ -743,22 +794,17 @@
     </hop>
     <hop>
       <from>Select values</from>
-      <to>Database lookup</to>
+      <to>obtener sk_fecha</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup</from>
-      <to>Database lookup 2</to>
+      <from>obtener sk_fecha</from>
+      <to>Obtener sk_evento</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
-      <from>Database lookup 2</from>
-      <to>Database lookup 3</to>
-      <enabled>Y</enabled>
-    </hop>
-    <hop>
-      <from>Database lookup 3</from>
-      <to>Table output</to>
+      <from>Obtener sk_evento</from>
+      <to>Obtener sk_sede</to>
       <enabled>Y</enabled>
     </hop>
     <hop>
@@ -769,6 +815,11 @@
     <hop>
       <from>Filter rows</from>
       <to>Dummy (do nothing)</to>
+      <enabled>Y</enabled>
+    </hop>
+    <hop>
+      <from>Obtener sk_sede</from>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -817,7 +868,7 @@
     </GUI>
   </step>
   <step>
-    <name>Database lookup</name>
+    <name>obtener sk_fecha</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -865,7 +916,7 @@
     </GUI>
   </step>
   <step>
-    <name>Database lookup 2</name>
+    <name>Obtener sk_evento</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -913,7 +964,7 @@
     </GUI>
   </step>
   <step>
-    <name>Database lookup 3</name>
+    <name>Obtener sk_sede</name>
     <type>DBLookup</type>
     <description/>
     <distribute>Y</distribute>
@@ -1593,7 +1644,87 @@ GROUP BY e.eve_cod_evento, e.fk_sede, e.eve_fecha_inicio;
       </output>
     </remotesteps>
     <GUI>
-      <xloc>1344</xloc>
+      <xloc>1328</xloc>
+      <yloc>96</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>f_meta</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>FACT_META</table>
+      <key>
+        <name>sk_fecha_evento</name>
+        <field>sk_fecha_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>sk_evento</name>
+        <field>sk_evento</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <key>
+        <name>sk_sede</name>
+        <field>sk_sede</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>sk_evento</name>
+        <rename>sk_evento</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>sk_sede</name>
+        <rename>sk_sede</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>sk_fecha_evento</name>
+        <rename>sk_fecha_evento</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nro_stands_propuestos</name>
+        <rename>nro_stands_propuestos</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cantidad_estim_visitantes</name>
+        <rename>cantidad_estim_visitantes</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>meta_ingreso</name>
+        <rename>meta_ingreso</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>1328</xloc>
       <yloc>192</yloc>
       <draw>Y</draw>
     </GUI>

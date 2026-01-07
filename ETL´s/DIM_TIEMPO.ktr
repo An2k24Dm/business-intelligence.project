@@ -462,6 +462,61 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
+    <name>tiempo</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>dw_expoucab</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc80ece9f85b90da77ed1c3fd89</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>5432</attribute>
       </attribute>
@@ -510,7 +565,7 @@
     </hop>
     <hop>
       <from>campos_desc_js</from>
-      <to>Table output</to>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -857,7 +912,7 @@
     </remotesteps>
     <GUI>
       <xloc>720</xloc>
-      <yloc>224</yloc>
+      <yloc>112</yloc>
       <draw>Y</draw>
     </GUI>
   </step>
@@ -932,6 +987,104 @@ desc_dia_semana = dias[cod_dia_semana - 1];
     </remotesteps>
     <GUI>
       <xloc>608</xloc>
+      <yloc>224</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>tiempo</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>DIM_TIEMPO</table>
+      <key>
+        <name>fecha</name>
+        <field>fecha</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>fecha</name>
+        <rename>fecha</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_anio</name>
+        <rename>cod_anio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_mes</name>
+        <rename>cod_mes</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_dia_mes</name>
+        <rename>cod_dia_mes</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_dia_anio</name>
+        <rename>cod_dia_anio</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_semana</name>
+        <rename>cod_semana</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_trimestre</name>
+        <rename>cod_trimestre</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_dia_semana</name>
+        <rename>cod_dia_semana</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>des_trimestre</name>
+        <rename>des_trimestre</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>desc_mes</name>
+        <rename>desc_mes</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>desc_mes_corta</name>
+        <rename>desc_mes_corta</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>desc_dia_semana</name>
+        <rename>desc_dia_semana</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>720</xloc>
       <yloc>224</yloc>
       <draw>Y</draw>
     </GUI>

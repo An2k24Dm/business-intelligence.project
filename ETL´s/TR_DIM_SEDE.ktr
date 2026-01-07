@@ -437,6 +437,57 @@
   <notepads>
   </notepads>
   <connection>
+    <name>d_sede</name>
+    <server>localhost</server>
+    <type>POSTGRESQL</type>
+    <access>Native</access>
+    <database>dw_expoucab</database>
+    <port>5432</port>
+    <username>postgres</username>
+    <password>Encrypted 2be98afc80ece9f85b90da77ed1c3fd89</password>
+    <servername/>
+    <data_tablespace/>
+    <index_tablespace/>
+    <attributes>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_LOWERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>FORCE_IDENTIFIERS_TO_UPPERCASE</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>PORT_NUMBER</code>
+        <attribute>5432</attribute>
+      </attribute>
+      <attribute>
+        <code>PRESERVE_RESERVED_WORD_CASE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>QUOTE_ALL_FIELDS</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_BOOLEAN_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>SUPPORTS_TIMESTAMP_DATA_TYPE</code>
+        <attribute>Y</attribute>
+      </attribute>
+      <attribute>
+        <code>USE_POOLING</code>
+        <attribute>N</attribute>
+      </attribute>
+    </attributes>
+  </connection>
+  <connection>
     <name>dim_sede</name>
     <server>localhost</server>
     <type>POSTGRESQL</type>
@@ -459,6 +510,10 @@
       </attribute>
       <attribute>
         <code>IS_CLUSTERED</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
+        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
         <attribute>N</attribute>
       </attribute>
       <attribute>
@@ -513,6 +568,10 @@
         <attribute>N</attribute>
       </attribute>
       <attribute>
+        <code>MSSQL_DOUBLE_DECIMAL_SEPARATOR</code>
+        <attribute>N</attribute>
+      </attribute>
+      <attribute>
         <code>PORT_NUMBER</code>
         <attribute>5432</attribute>
       </attribute>
@@ -546,7 +605,7 @@
     </hop>
     <hop>
       <from>Select values</from>
-      <to>Table output</to>
+      <to>Insert / update</to>
       <enabled>Y</enabled>
     </hop>
   </order>
@@ -893,6 +952,74 @@ JOIN PAIS   p ON p.Pai_cod_pais = c.Fk_pais;
     <return_field/>
     <fields>
     </fields>
+    <attributes/>
+    <cluster_schema/>
+    <remotesteps>
+      <input>
+      </input>
+      <output>
+      </output>
+    </remotesteps>
+    <GUI>
+      <xloc>368</xloc>
+      <yloc>256</yloc>
+      <draw>Y</draw>
+    </GUI>
+  </step>
+  <step>
+    <name>Insert / update</name>
+    <type>InsertUpdate</type>
+    <description/>
+    <distribute>Y</distribute>
+    <custom_distribution/>
+    <copies>1</copies>
+    <partitioning>
+      <method>none</method>
+      <schema_name/>
+    </partitioning>
+    <connection>d_sede</connection>
+    <commit>100</commit>
+    <update_bypassed>N</update_bypassed>
+    <lookup>
+      <schema>public</schema>
+      <table>DIM_SEDE</table>
+      <key>
+        <name>cod_sede</name>
+        <field>cod_sede</field>
+        <condition>=</condition>
+        <name2/>
+      </key>
+      <value>
+        <name>cod_pais</name>
+        <rename>cod_pais</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nb_pais</name>
+        <rename>nb_pais</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_ciudad</name>
+        <rename>cod_ciudad</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nb_ciudad</name>
+        <rename>nb_ciudad</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>cod_sede</name>
+        <rename>cod_sede</rename>
+        <update>Y</update>
+      </value>
+      <value>
+        <name>nb_sede</name>
+        <rename>nb_sede</rename>
+        <update>Y</update>
+      </value>
+    </lookup>
     <attributes/>
     <cluster_schema/>
     <remotesteps>
