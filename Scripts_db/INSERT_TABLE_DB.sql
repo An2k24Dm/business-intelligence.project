@@ -82,12 +82,12 @@ INSERT INTO EVENTO_STAND (Fk_evento, Fk_tipo_stand, Evs_cantidad_estimada, Evs_m
 (3, 3, 8, 15, 1000);
 
 INSERT INTO CONTRATO (Con_fecha_alquiler, Con_mts_cuadrados_adicionales, Con_monto, Fk_cliente, Fk_evento, Fk_subcategoria, Fk_tipo_stand) VALUES
-('2025-02-15', 0, 400, 1, 1, 1, 1),
-('2025-02-20', 2, 750, 2, 1, 4, 3),
-('2025-03-01', 0, 300, 3, 1, 2, 1),
-('2025-04-01', 0, 600, 2, 2, 3, 2),
-('2025-04-05', 3, 900, 1, 2, 1, 3),
-('2025-05-01', 0, 650, 3, 3, 5, 2);
+('2025-02-15', 0, 500, 1, 1, 1, 1),
+('2025-02-20', 2, 1300, 2, 1, 4, 3),
+('2025-03-01', 0, 500, 3, 1, 2, 1),
+('2025-04-01', 0, 800, 2, 2, 3, 2),
+('2025-04-05', 3, 1450, 1, 2, 1, 3),
+('2025-05-01', 0, 800, 3, 3, 5, 2);
 
 INSERT INTO ENTRADA (Ent_fecha_entrada, Ent_hora_entrada, Ent_recomienda_amigo, Ent_calificacion, Fk_evento, Fk_visitante, Fk_leyenda_estrella) VALUES
 ('2025-03-10', '10:15', TRUE, 5, 1, 1, 5),
