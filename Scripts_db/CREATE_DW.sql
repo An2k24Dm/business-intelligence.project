@@ -134,7 +134,7 @@ CREATE TABLE FACT_VISITA (
     sk_fec_entrada INTEGER NOT NULL,
     sk_leyenda_estrellas INTEGER NOT NULL,
     num_entrada INTEGER NOT NULL,
-    hora_entrada TIMESTAMP NOT NULL,
+    hora_entrada TIME NOT NULL,
     cantidad_visitantes INTEGER NOT NULL,
     calificacion VARCHAR(10) NOT NULL,
     recomienda_amigo VARCHAR(100) NOT NULL,
